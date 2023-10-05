@@ -12,7 +12,4 @@ application = app = create_app(os.environ.get('FLASK_ENV', 'production'))
 
 
 if __name__ == '__main__':
-    from api.main import before_first_request
-    with app.app_context():
-        before_first_request()
     socketio.run(app, log_output=True)

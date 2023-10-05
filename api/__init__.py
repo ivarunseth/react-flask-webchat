@@ -66,4 +66,9 @@ def create_app(config_name=None, main=True):
     from .tasks import tasks_bp as tasks_blueprint
     app.register_blueprint(tasks_blueprint, url_prefix='/tasks')
 
+    if not app.config['TESTING']:
+        from api.main import before_first_request
+        with app.app_context():
+            before_first_request()
+
     return app
