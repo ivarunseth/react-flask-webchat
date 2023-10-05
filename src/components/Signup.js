@@ -100,7 +100,7 @@ const SignUp = () => {
                         </Form.Group>
 
                         <Form.Group className="mb-3">
-                            <Form.Label>Password</Form.Label>
+                            <Form.Label>Confirm password</Form.Label>
                             <InputGroup hasValidation>
                                 <Form.Control
                                     type="password"
