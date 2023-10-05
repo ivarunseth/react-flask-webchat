@@ -33,7 +33,7 @@ const ChatWindow = () => {
             if (user) {
                 try {
                     const response = await axios.get(
-                        '/api/users?online=1',
+                        '/api/users',
                         {
                             headers: {
                                 "Authorization": `Bearer ${user.token}`
