@@ -13,7 +13,7 @@ const ChatWindow = () => {
     const { user } = useContext(UserContext);
     const socket = useSocket();
     
-    const [onlineUsers, setOnlineUsers] = useState([]);
+    const [users, setUsers] = useState([]);
 
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState("");
@@ -29,7 +29,7 @@ const ChatWindow = () => {
     }, [user, navigate]);
 
     useEffect(() => {
-        const getOnlineUsers = async () => {
+        const getUsers = async () => {
             if (user) {
                 try {
                     const response = await axios.get(
@@ -40,13 +40,13 @@ const ChatWindow = () => {
                             }
                         }
                     );
-                    setOnlineUsers(response.data.users);
+                    setUsers(response.data.users);
                 } catch (error) {
                     console.error("Error fetching online users:", error);
                 }
             }
         };
-        getOnlineUsers();
+        getUsers();
     }, [user]);
     
     useEffect(() => {
@@ -80,7 +80,7 @@ const ChatWindow = () => {
                     setMessages(prevMessages => [...prevMessages, data.model]);
                 } else if (data.class === 'User') {
                     // Handle user update received from the server
-                    setOnlineUsers(prevUsers => {
+                    setUsers(prevUsers => {
                         // Check if the updated user is already in the online users list
                         const userIndex = prevUsers.findIndex(user => user.id === data.model.id);
 
@@ -159,7 +159,7 @@ const ChatWindow = () => {
                                         fontStyle: "italic",
                                         fontSize: "0.8rem"
                                     }}>
-                                        ~ {onlineUsers.find(user => user.id === message.user_id)?.nickname}
+                                        ~ {users.find(user => user.id === message.user_id)?.nickname}
                                     </div>
                                 )}
                                 <div
