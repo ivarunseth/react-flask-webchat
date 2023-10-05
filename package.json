@@ -1,5 +1,5 @@
 {
-  "name": "chat-app",
+  "name": "react-flask-webchat",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
