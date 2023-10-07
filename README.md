@@ -54,10 +54,6 @@ Updates python package installer.
 
 Installs all python packages required to the application.
 
-    flask createdb
-
-Create the database for the application.
-
     python app.py
 
     or
