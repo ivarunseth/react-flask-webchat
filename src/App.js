@@ -1,8 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import LoginForm from "./components/LoginForm";
-import SignUp from "./components/Signup";
-import ChatWindow from "./components/ChatWindow";
+import SignIn from "./components/SignIn";
+import SignUp from "./components/SignUp";
+import Chat from "./components/Chat";
 import { UserProvider } from "./contexts/UserContext";
 import { SocketProvider } from "./contexts/SocketContext";
 
@@ -13,9 +13,9 @@ const App = () => {
         <SocketProvider>
           {/* SocketProvider should wrap the components using useSocket */}
           <Routes>
-            <Route path="/" element={<LoginForm />} />
+            <Route path="/" element={<SignIn />} />
             <Route path="/signup" element={<SignUp />} />
-            <Route path="/chat" element={<ChatWindow />} />
+            <Route path="/chat" element={<Chat />} />
           </Routes>
         </SocketProvider>
       </UserProvider>
