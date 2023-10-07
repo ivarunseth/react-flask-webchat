@@ -12,7 +12,7 @@ db = SQLAlchemy()
 socketio = SocketIO(cors_allowed_origins="*", engineio_logger=True)
 celery = Celery(__name__,
                 broker=os.environ.get('CELERY_BROKER_URL', 'redis://'),
-                backend=os.environ.get('CELERY_BROKER_URL', 'redis://'))
+                backend=os.environ.get('CELERY_RESULT_BACKEND', os.environ.get('CELERY_BROKER_URL', 'redis://')))
 celery.config_from_object('api.celery_config')
 
 # Import models so that they are registered with SQLAlchemy
@@ -36,6 +36,7 @@ def create_app(config_name=None, main=True):
 
     @app.cli.command('createdb')
     def createdb(): 
+        """creates the database"""
         db.create_all()
     
     if main:
@@ -65,10 +66,5 @@ def create_app(config_name=None, main=True):
     # Register async tasks support
     from .tasks import tasks_bp as tasks_blueprint
     app.register_blueprint(tasks_blueprint, url_prefix='/tasks')
-
-    if not app.config['TESTING']:
-        from api.main import before_first_request
-        with app.app_context():
-            before_first_request()
 
     return app

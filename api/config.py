@@ -5,8 +5,8 @@ class Config(object):
     DEBUG = False
     TESTING = False
     SECRET_KEY = os.environ.get('SECRET_KEY', '51f52814-0071-11e6-a247-000ec6c2372c')
-    SERVER_NAME = os.environ.get("SERVER_NAME", "127.0.0.1:5000")
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL', 'sqlite:///db.sqlite3')
+    # SERVER_NAME = os.environ.get("SERVER_NAME", "127.0.0.1:5000")
+    SQLALCHEMY_DATABASE_URI = os.environ.get('SQLALCHEMY_DATABASE_URI', 'sqlite:///db.sqlite3')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     REQUEST_STATS_WINDOW = 15
     CELERY_CONFIG = {}
