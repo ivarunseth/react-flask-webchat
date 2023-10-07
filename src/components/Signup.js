@@ -109,14 +109,14 @@ const SignUp = () => {
                                     onChange={(e) => setConfirmPassword(e.target.value)}
                                     required
                                 />
-                                <Form.Text id="passwordHelpBlock" muted>
-                                    Your password must be 8-20 characters long, contain letters and numbers,
-                                    and must not contain spaces, special characters, or emoji.
-                                </Form.Text>
                                 <Form.Control.Feedback type="invalid">
                                     Please confirm password.
                                 </Form.Control.Feedback>
                             </InputGroup>
+                            <Form.Text id="passwordHelpBlock" muted>
+                                    Your password must be 8-20 characters long, contain letters and numbers,
+                                    and must not contain spaces, special characters, or emoji.
+                                </Form.Text>
                         </Form.Group>
 
                         <div className="d-grid gap-2 mb-3">

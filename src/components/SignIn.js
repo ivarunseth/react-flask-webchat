@@ -4,7 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
 import axios from "axios";
 
-const LoginForm = () => {
+const SignIn = () => {
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -66,7 +66,7 @@ const LoginForm = () => {
         <div className="d-flex justify-content-center align-items-center vh-100">
             <Card style={{ width: "30rem" }}>
                 <Card.Body>
-                    <Card.Title className="text-center mb-3">Login</Card.Title>
+                    <Card.Title className="text-center mb-3">Sign In</Card.Title>
 
                     {alert && <Alert variant={alert.variant} onClose={() => setAlert(null)} dismissible>{alert.message}</Alert>}
 
@@ -116,4 +116,4 @@ const LoginForm = () => {
     );
 };
 
-export default LoginForm;
+export default SignIn;
