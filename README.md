@@ -4,9 +4,11 @@ This project is a real-time chat application built with Flask, Celery, Socket.io
 
 ## How to Run the Application
 
-### Prerequisites
+### Local Setup
 
-This project is developed and tested using Python3.9 and Node v18.17.1
+#### Prerequisites
+
+This project is developed and tested using Python3.9 and Node v18.17.1, please ensure the same are installed.
 
 #### Client
 
@@ -67,3 +69,15 @@ Runs the flask application.
     celery -A api.celery worker -l info
 
 Runs the celery worker for asynchronous tasks.
+
+### Using Docker
+
+For using Docker to run the application make sure you have the latest version of Docker installed.
+
+    docker compose build app
+
+Builds the application image using docker.
+
+    docker compose up
+
+Starts the application.
