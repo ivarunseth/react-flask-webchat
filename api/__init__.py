@@ -53,6 +53,7 @@ def create_app(config_name=None, main=True):
         # Initialize socketio to emit events through through the message queue
         # Note that since Celery does not use eventlet, we have to be explicit
         # in setting the async mode to not use it.
+        app.config['SERVER_NAME'] = os.environ.get('SERVER_NAME', 'http://localhost:5000/')
         socketio.init_app(None,
                           message_queue=app.config['SOCKETIO_MESSAGE_QUEUE'],
                           async_mode='threading')
