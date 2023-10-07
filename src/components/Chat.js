@@ -13,13 +13,13 @@ const Chat = () => {
 
     const { user } = useContext(UserContext);
     const socket = useSocket();
-    
+
     const [users, setUsers] = useState([]);
 
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState("");
     const [isSendDisabled, setIsSendDisabled] = useState(false);
-    
+
     const messagesEndRef = useRef(null);
 
     useEffect(() => {
@@ -49,7 +49,7 @@ const Chat = () => {
         };
         getUsers();
     }, [user]);
-    
+
     useEffect(() => {
         // Fetch messages from the backend API when the component mounts
         const getMessages = async () => {
@@ -148,7 +148,11 @@ const Chat = () => {
 
                         }}>
                         {messages.map((message) => (
-                            <Message message={message} users={users}/>
+                            <Message
+                                key={message.id}
+                                message={message}
+                                users={users}
+                            />
                         ))}
 
                         <div ref={messagesEndRef} />
@@ -157,7 +161,6 @@ const Chat = () => {
                         style={{
                             position: "sticky",
                             bottom: 0,
-                            padding: "0.6rem",
                             maxHeight: "9rem",
                             borderTop: "0.06rem solid #ccc",
                         }}

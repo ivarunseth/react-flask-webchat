@@ -29,7 +29,7 @@ export const useSocket = () => {
     useEffect(() => {
 
         if (user && !socket.current) {
-            socket.current = io('http://127.0.0.1:5000',{ transports: ['websocket']} );
+            socket.current = io('http://localhost:5000',{ transports: ['websocket']} );
 
             let pingInterval;
 

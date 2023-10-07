@@ -1,4 +1,13 @@
 {
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ],
+    "plugins": [
+      "@babel/plugin-proposal-private-property-in-object"
+    ]
+  },
   "name": "react-flask-webchat",
   "version": "0.1.0",
   "private": true,

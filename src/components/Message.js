@@ -7,7 +7,6 @@ const Message = ({message, users}) => {
 
     return (
         <div
-            key={message.id}
             style={{
                 marginBottom: "1rem",
             }}
