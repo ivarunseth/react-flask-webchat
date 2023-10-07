@@ -2,6 +2,7 @@ import os
 
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 from flask_socketio import SocketIO
 from celery import Celery
 
@@ -9,6 +10,7 @@ from .config import flask_config
 
 # Flask extensions
 db = SQLAlchemy()
+migrate = Migrate()
 socketio = SocketIO(cors_allowed_origins="*", engineio_logger=True)
 celery = Celery(__name__,
                 broker=os.environ.get('CELERY_BROKER_URL', 'redis://'),
@@ -33,11 +35,12 @@ def create_app(config_name=None, main=True):
 
     # Initialize flask extensions
     db.init_app(app)
+    migrate.init_app(app, db, directory='./migrations')
 
-    @app.cli.command('createdb')
-    def createdb(): 
-        """creates the database"""
-        db.create_all()
+    # @app.cli.command('createdb')
+    # def createdb(): 
+    #     """creates the database"""
+    #     db.create_all()
     
     if main:
         # Initialize socketio server and attach it to the message queue, so
