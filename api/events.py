@@ -14,8 +14,7 @@ def push_model(model):
 @socketio.on('ping_user')
 def on_ping_user(token):
     """Clients must send this event periodically to keep the user online."""
-    verify_token(token, add_to_session=True)
-    if g.current_user:
+    if verify_token(token, add_to_session=True):
         # Mark the user as still online
         g.current_user.ping()
 
@@ -50,8 +49,7 @@ def post_message(user_id, data):
 @socketio.on('post_message')
 def on_post_message(data, token):
     """Clients send this event to when the user posts a message."""
-    verify_token(token, add_to_session=True)
-    if g.current_user:
+    if verify_token(token, add_to_session=True):
         post_message.apply_async(args=(g.current_user.id, data))
 
 
