@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
+import DOMPurify from 'dompurify';
 
 const Message = ({message, users}) => {
 
@@ -37,9 +38,8 @@ const Message = ({message, users}) => {
                         maxWidth: "69%", // Set a maximum width for the message bubbles
                         display: "block",
                     }}
-                >
-                    {message.html}
-                </div>
+                    dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(message.html) }}
+                />
             </div>
             <div
                 style={{
