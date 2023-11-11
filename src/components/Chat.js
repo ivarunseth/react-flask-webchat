@@ -161,11 +161,10 @@ const Chat = () => {
                         style={{
                             position: "sticky",
                             bottom: 0,
-                            maxHeight: "9rem",
                             borderTop: "0.06rem solid #ccc",
                         }}
                     >
-                        <Form className="mt-3">
+                        <Form className="py-3">
                             <InputGroup>
                                 <Form.Control
                                     as="textarea"
