@@ -1,15 +1,13 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Alert, Card, Form, InputGroup, Button } from "react-bootstrap";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
-import axios from "axios";
 
 const SignIn = () => {
 
     const location = useLocation();
-    const navigate = useNavigate();
 
-    const { setUser } = useContext(UserContext)
+    const { login } = useContext(UserContext)
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -28,30 +26,14 @@ const SignIn = () => {
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        
         const form = e.currentTarget;
-
         if (form.checkValidity() === false) {
             e.stopPropagation();
         }
-
         setValidated(true);
-
         if (username !== '' && password !== '') {
             try {
-                const response = await axios.post(
-                    '/api/tokens',
-                    {},
-                    {
-                        auth: {
-                            username: username,
-                            password: password
-                        }
-                    }
-                );
-                setUser(response.data)
-                localStorage.setItem("user", JSON.stringify(response.data));
-                navigate("/chat");
+                login(username, password)
             } catch (error) {   
                 setAlert({ variant: 'danger', message: 'Invalid username or password.' });
                 console.error(error)

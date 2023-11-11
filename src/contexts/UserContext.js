@@ -19,11 +19,35 @@ export const UserProvider = ({ children }) => {
         }
     }, [user, navigate]);
 
-    // Handle logout logic
-    const logout = () => {
-        if (user) {
-            axios.delete('/api/tokens', {headers: { "Authorization" : `Bearer ${user.token}` } }
+    // Handle login logic
+    const login = async (username, password) => {
+        if (!user) {
+            await axios.post('/api/tokens',
+                {},
+                {
+                    auth: {
+                        username: username,
+                        password: password
+                    }
+                }
             ).then(response => {
+                setUser(response.data)
+                localStorage.setItem("user", JSON.stringify(response.data));
+                navigate("/chat");
+            }).catch(error => {
+                console.error('Error on login', error)
+            });
+        }
+    }
+
+    // Handle logout logic
+    const logout = async () => {
+        if (user) {
+            await axios.delete('/api/tokens', {
+                headers: { 
+                    Authorization : `Bearer ${user.token}` 
+                } 
+            }).then(response => {
                 if (response.status === 204) {
                     localStorage.removeItem("user");
                     setUser(null);
@@ -36,7 +60,7 @@ export const UserProvider = ({ children }) => {
     };
 
     return (
-        <UserContext.Provider value={{ user, setUser, logout }}>
+        <UserContext.Provider value={{ user, setUser, login, logout }}>
             {children}
         </UserContext.Provider>
     );
