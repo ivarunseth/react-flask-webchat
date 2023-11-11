@@ -27,9 +27,8 @@ from .tasks import run_flask_request  # noqa
 from . import events  # noqa
 
 
-def create_app(config_name=None, main=True):
-    if config_name is None:
-        config_name = os.environ.get('FLASK_ENV', 'development')
+def create_app(config_name=os.environ.get('FLASK_ENV', 'development'), main=True):
+
     app = Flask(__name__, static_folder='../build', static_url_path='/')
     app.config.from_object(flask_config[config_name])
 
@@ -37,11 +36,6 @@ def create_app(config_name=None, main=True):
     db.init_app(app)
     migrate.init_app(app, db, directory='./migrations')
 
-    # @app.cli.command('createdb')
-    # def createdb(): 
-    #     """creates the database"""
-    #     db.create_all()
-    
     if main:
         # Initialize socketio server and attach it to the message queue, so
         # that everything works even when there are multiple servers or
@@ -55,8 +49,8 @@ def create_app(config_name=None, main=True):
         # in setting the async mode to not use it.
         app.config['SERVER_NAME'] = os.environ.get('SERVER_NAME', 'http://localhost:5000/')
         socketio.init_app(None,
-                          message_queue=app.config['SOCKETIO_MESSAGE_QUEUE'],
-                          async_mode='threading')
+                          message_queue=app.config['SOCKETIO_MESSAGE_QUEUE'])
+
     celery.conf.update(flask_config[config_name].CELERY_CONFIG)
 
     # Register web application routes
