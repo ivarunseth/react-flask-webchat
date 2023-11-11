@@ -11,8 +11,7 @@ services:
     ports:
       - "5000:5000"
     volumes:
-      - "./logs:/app/logs"
-      - data:/app/data
+      - ./logs:/app/logs
     depends_on:
       - db
       - redis
