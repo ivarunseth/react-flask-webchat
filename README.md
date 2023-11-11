@@ -1,6 +1,6 @@
 # Real-time webchat application using React and Flask
 
-This project is a real-time chat application built with Flask, Celery, Socket.io, and SQLite3. Users can sign up, log in and send and receive real-time messages.
+This project is a real-time chat application built with React, Flask, Celery, Socket.io, and SQLite3. Users can sign up, log in and send and receive real-time messages.
 
 ## How to Run the Application
 
@@ -62,7 +62,7 @@ Installs all python packages required to the application.
 
 Runs the flask application.
 
-    celery -A api.celery worker -l info
+    celery -A api.celery worker -l info -P eventlet -Ofair
 
 Runs the celery worker for asynchronous tasks.
 
